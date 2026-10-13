@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BETANOL - Apostas Desportivas & Transmissão Pirata do Parlamento</title>
+  <style>
+    :root {
+      --betano-orange: #f05323;
+      --betano-red: #d9381e;
+      --betano-dark: #121214;
+      --betano-card: #1a1a1e;
+      --betano-card-border: #2a2a32;
+      --betano-gold: #ffb800;
+      --betano-green: #00d665;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      --font-mono: "Consolas", "Courier New", Courier, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--betano-dark);
+      color: #f4f4f5;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      line-height: 1.4;
+      padding-bottom: 70px;
+    }
+
+    /* Faixa Superior Pirata Piscante */
+    .pirate-ticker-bar {
+      background: #000000;
+      border-bottom: 2px solid var(--betano-red);
+      color: #ff4d4d;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 6px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .ticker-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .live-dot {
+      width: 9px;
+      height: 9px;
+      background: #ff0000;
+      border-radius: 50%;
+      animation: blink-live 0.8s infinite alternate;
+    }
+
+    @keyframes blink-live {
+      from { opacity: 0.2; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1.15); }
+    }
+
+    .server-tag {
+      background: #27272a;
+      color: #e4e4e7;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+    }
+
+    /* Cabeçalho Oficial Betanol */
+    .betano-header {
+      background: linear-gradient(90deg, #d9381e 0%, #f05323 100%);
+      padding: 10px clamp(14px, 3vw, 28px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 4px 15px rgba(240, 83, 35, 0.35);
+      flex-wrap: wrap;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo-text {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #ffffff;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 0 #7f1d1d;
+    }
+
+    .brand-logo-text span {
+      background: #ffffff;
+      color: var(--betano-red);
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-left: 4px;
+      font-size: 20px;
+    }
+
+    .brand-slogan {
+      font-size: 11px;
+      font-weight: 700;
+      color: #fee2e2;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-pill {
+      background: rgba(0, 0, 0, 0.25);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .nav-pill.active,
+    .nav-pill:hover {
+      background: #000000;
+      border-color: var(--betano-gold);
+      color: var(--betano-gold);
+    }
+
+    /* Contentor Principal */
+    .main-wrap {
+      max-width: 1120px;
+      margin: 18px auto 0;
+      padding: 0 14px;
+    }
+
+    /* Grelha de Streaming Pirata + SuperOdds */
+    .stream-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 860px) {
+      .stream-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Painel do Falso Leitor de Vídeo Pirata */
+    .video-card {
+      background: #000000;
+      border: 2px solid #27272a;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .video-top {
+      background: #18181b;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #27272a;
+      font-size: 11.5px;
+    }
+
+    .video-title {
+      font-weight: 700;
+      color: #f4f4f5;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .video-screen {
+      position: relative;
+      background: radial-gradient(circle at center, #1f2937 0%, #030712 100%);
+      aspect-ratio: 16 / 9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* Marcador do Placar de Jogo Satírico */
+    .scoreboard-overlay {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid #3f3f46;
+      border-radius: 4px;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .score-badge {
+      background: var(--betano-red);
+      color: #ffffff;
+      padding: 1px 5px;
+      border-radius: 2px;
+    }
+
+    .watermark-pirate {
+      position: absolute;
+      bottom: 12px;
+      right: 14px;
+      color: rgba(255, 255, 255, 0.35);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    /* Roda de Carregamento Falsa */
+    .buffer-spinner {
+      width: 48px;
+      height: 48px;
+      border: 5px solid rgba(255, 255, 255, 0.15);
+      border-top-color: var(--betano-orange);
+      border-radius: 50%;
+      animation: spin-buffer 0.9s linear infinite;
+      margin-bottom: 12px;
+    }
+
+    @keyframes spin-buffer {
+      to { transform: rotate(360deg); }
+    }
+
+    .buffer-text {
+      color: #e4e4e7;
+      font-weight: 700;
+      font-size: 13px;
+      text-shadow: 0 2px 4px #000;
+      text-align: center;
+      padding: 0 16px;
+    }
+
+    .btn-fake-play {
+      margin-top: 14px;
+      background: var(--betano-orange);
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      padding: 10px 18px;
+      border-radius: 4px;
+      font-weight: 900;
+      font-size: 12px;
+      text-transform: uppercase;
+      box-shadow: 0 0 15px rgba(240, 83, 35, 0.6);
+      transition: transform 0.15s, background 0.15s;
+    }
+
+    .btn-fake-play:hover {
+      background: var(--betano-red);
+      transform: scale(1.04);
+    }
+
+    /* Falsos Botões [X] Espalhados no Player */
+    .fake-player-x {
+      position: absolute;
+      background: #ef4444;
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 900;
+      padding: 3px 6px;
+      border-radius: 2px;
+      cursor: pointer;
+      border: 1px solid #ffffff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .fake-x-top-right { top: 10px; right: 10px; }
+    .fake-x-bottom-left { bottom: 10px; left: 10px; }
+
+    /* Barra de Controlos Falsos */
+    .video-controls-bar {
+      background: #18181b;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #27272a;
+      font-size: 11px;
+      color: #a1a1aa;
+    }
+
+    .stream-servers {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-server {
+      background: #27272a;
+      color: #e4e4e7;
+      border: 1px solid #3f3f46;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-size: 10.5px;
+      cursor: pointer;
+    }
+
+    .btn-server.active {
+      background: var(--betano-red);
+      border-color: #ffffff;
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    /* Painel de SuperOdds Betanol */
+    .odds-panel {
+      background: var(--betano-card);
+      border: 1.5px solid var(--betano-card-border);
+      border-radius: 6px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-header-badge {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--betano-red);
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+
+    .panel-title {
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .superodd-badge {
+      background: var(--betano-gold);
+      color: #000000;
+      font-weight: 900;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    /* Lista de Apostas com Situações Tipicamente Portuguesas */
+    .odds-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .odd-row {
+      background: #232328;
+      border: 1px solid #33333d;
+      border-radius: 4px;
+      padding: 9px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .odd-row:hover {
+      border-color: var(--betano-orange);
+      background: #282830;
+    }
+
+    .odd-info {
+      flex: 1;
+    }
+
+    .odd-event-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #f4f4f5;
+      line-height: 1.3;
+    }
+
+    .odd-event-context {
+      font-size: 11px;
+      color: #a1a1aa;
+      margin-top: 2px;
+    }
+
+    .odd-button {
+      background: #18181b;
+      border: 1.5px solid var(--betano-gold);
+      color: var(--betano-gold);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 900;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      min-width: 60px;
+      text-align: center;
+      transition: all 0.12s;
+    }
+
+    .odd-button:hover {
+      background: var(--betano-gold);
+      color: #000000;
+      transform: translateY(-1px);
+    }
+
+    /* A Raspadinha do Tuga & Casino */
+    .middle-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 780px) {
+      .middle-section {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .scratch-card-box {
+      background: linear-gradient(135deg, #1f1b2e 0%, #16151f 100%);
+      border: 2px solid var(--betano-gold);
+      border-radius: 6px;
+      padding: 16px;
+      box-shadow: 0 4px 15px rgba(255, 184, 0, 0.15);
+    }
+
+    .scratch-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .scratch-title {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--betano-gold);
+      text-transform: uppercase;
+    }
+
+    .scratch-price {
+      background: #000000;
+      color: #ffffff;
+      border: 1px solid var(--betano-gold);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .scratch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .scratch-cell {
+      background: #2d2a3e;
+      border: 2px dashed #6b7280;
+      border-radius: 4px;
+      height: 70px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #e4e4e7;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      padding: 4px;
+      transition: background 0.15s;
+    }
+
+    .scratch-cell.scratched {
+      background: #000000;
+      border-style: solid;
+      border-color: var(--betano-gold);
+      color: var(--betano-gold);
+    }
+
+    .scratch-status-text {
+      background: #111115;
+      border: 1px solid #27272a;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 11.5px;
+      color: #d4d4d8;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      line-height: 1.35;
+    }
+
+    /* Banners Clickbait Típicos da Internet Portuguesa */
+    .clickbait-box {
+      background: var(--betano-card);
+      border: 1.5px solid var(--betano-card-border);
+      border-radius: 6px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .clickbait-item {
+      background: #000000;
+      border: 1px solid #3f3f46;
+      border-radius: 4px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+
+    .clickbait-item:hover {
+      border-color: #ef4444;
+    }
+
+    .clickbait-badge {
+      background: #ef4444;
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 900;
+      padding: 3px 6px;
+      border-radius: 2px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .clickbait-headline {
+      font-size: 12px;
+      font-weight: 700;
+      color: #f4f4f5;
+      line-height: 1.3;
+    }
+
+    /* Rodapé e Fecho Oficial */
+    .footer-bar {
+      margin-top: 24px;
+      background: #18181b;
+      border: 2px solid #27272a;
+      border-radius: 6px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .btn-exit-pirate {
+      background: #27272a;
+      color: #ffffff;
+      border: 1.5px solid #52525b;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 800;
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.15s;
+    }
+
+    .btn-exit-pirate:hover {
+      background: #dc2626;
+      border-color: #ffffff;
+    }
+
+    .disclaimer-text {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #71717a;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Faixa de Ticker Pirata -->
+  <div class="pirate-ticker-bar">
+    <div class="ticker-left">
+      <span class="live-dot"></span>
+      <span>TRANSMISSÃO PIRATA EM DIRETO</span>
+      <span class="server-tag">SERVIDOR PT-LISBOA 1</span>
+    </div>
+    <div>
+      <span>39.418 ESPECTADORES CONECTADOS &bull; SINAL SEM CORTES</span>
+    </div>
+  </div>
+
+  <!-- Cabeçalho Oficial Betanol -->
+  <header class="betano-header">
+    <div class="brand-wrap">
+      <div class="brand-logo-text">BETANOL<span>PRO</span></div>
+      <span class="brand-slogan">Aposta já, reclama aos teus avós</span>
+    </div>
+
+    <nav class="header-nav">
+      <button type="button" class="nav-pill active">Futebol & Dívida</button>
+      <button type="button" class="nav-pill" onclick="triggerBetanoAction('Casino dos Cativados')">Casino</button>
+      <button type="button" class="nav-pill" onclick="triggerBetanoAction('Raspadinha do Tuga')">Raspagov</button>
+      <button type="button" class="nav-pill" onclick="triggerBetanoAction('Emissão Parlamentar')">Ao Vivo</button>
+    </nav>
+  </header>
+
+  <main class="main-wrap">
+
+    <!-- Grelha Principal: Leitor de Vídeo Pirata + SuperOdds -->
+    <div class="stream-grid">
+
+      <!-- Leitor de Vídeo Pirata -->
+      <section class="video-card">
+        <div class="video-top">
+          <div class="video-title">
+            <span class="live-dot"></span>
+            <span>CANAL 1: SESSÃO PLENÁRIA DO PARLAMENTO (DIRETO EM 1080P)</span>
+          </div>
+          <span style="color: var(--betano-green); font-weight: 800;">BITRATE: 4500 KBPS</span>
+        </div>
+
+        <div class="video-screen" id="video-screen-player" onclick="handlePlayerClick(event)">
+          <!-- Placar Satírico -->
+          <div class="scoreboard-overlay">
+            <span>LIGA DA DESPESA</span>
+            <span class="score-badge">CONTRIBUINTES 0 - 5 ESTADO</span>
+            <span style="color: #ef4444;">90+6'</span>
+          </div>
+
+          <div class="watermark-pirate">PIRATA-TV.PT &bull; SPORT.GOV</div>
+
+          <!-- Spinner e Botão Falso de Play -->
+          <div class="buffer-spinner"></div>
+          <div class="buffer-text">A CARREGAR TRANSMISSÃO PIRATA... (BUFFERING 98%)</div>
+          <button type="button" class="btn-fake-play" id="btn-fake-play">
+            CLIQUE PARA REMOVER ANÚNCIOS E VER EM ECRÃ INTEIRO
+          </button>
+
+          <!-- Falsos botões [x] de fechar anúncio -->
+          <span class="fake-player-x fake-x-top-right" onclick="event.stopPropagation(); fakeXClick();">[X] Fechar</span>
+          <span class="fake-player-x fake-x-bottom-left" onclick="event.stopPropagation(); fakeXClick();">[X] Ad</span>
+        </div>
+
+        <div class="video-controls-bar">
+          <div class="stream-servers">
+            <span style="margin-right: 4px;">Servidores:</span>
+            <button type="button" class="btn-server active">Servidor 1 (HD)</button>
+            <button type="button" class="btn-server" onclick="switchServer(2)">Servidor 2 (Sem Travamento)</button>
+            <button type="button" class="btn-server" onclick="switchServer(3)">Servidor 3 (Bruxelas)</button>
+          </div>
+          <span>Qualidade: 1080p 60fps</span>
+        </div>
+      </section>
+
+      <!-- Painel de SuperOdds Betanol (Situações Genuinamente Portuguesas) -->
+      <section class="odds-panel">
+        <div class="panel-header-badge">
+          <div class="panel-title">
+            <span>SUPERODDS BETANOL</span>
+            <span class="superodd-badge">QUOTAS DO DIA</span>
+          </div>
+          <span style="font-size: 11px; color: #a1a1aa;">Mercados Nacionais</span>
+        </div>
+
+        <div class="odds-list">
+
+          <div class="odd-row">
+            <div class="odd-info">
+              <div class="odd-event-name">Segunda Circular parada entre o viaduto e o Campo Grande</div>
+              <div class="odd-event-context">Um Renault Clio parou na berma e bloqueou Lisboa inteira</div>
+            </div>
+            <button type="button" class="odd-button" onclick="placeOdd('Segunda Circular', '1.01')">1.01</button>
+          </div>
+
+          <div class="odd-row">
+            <div class="odd-info">
+              <div class="odd-event-name">Atestar o carro em Espanha ao fim de semana</div>
+              <div class="odd-event-context">Poupar 18 cêntimos por litro e trazer 2 presuntos e caramelos</div>
+            </div>
+            <button type="button" class="odd-button" onclick="placeOdd('Gasolina em Espanha', '1.02')">1.02</button>
+          </div>
+
+          <div class="odd-row">
+            <div class="odd-info">
+              <div class="odd-event-name">Pagar a bica ao balcão e dizer "não é preciso contribuinte chefe"</div>
+              <div class="odd-event-context">Café tirado a 80 cêntimos sem registo na máquina fiscal</div>
+            </div>
+            <button type="button" class="odd-button" onclick="placeOdd('Bica sem NIF', '1.04')">1.04</button>
+          </div>
+
+          <div class="odd-row">
+            <div class="odd-info">
+              <div class="odd-event-name">Quadro elétrico disparar com aquecedor e torradeira ligados</div>
+              <div class="odd-event-context">Potência contratada de 3.45 kVA da EDP a deitar fumo</div>
+            </div>
+            <button type="button" class="odd-button" onclick="placeOdd('Quadro da EDP', '1.08')">1.08</button>
+          </div>
+
+          <div class="odd-row">
+            <div class="odd-info">
+              <div class="odd-event-name">Condutor português fazer pisca para a esquerda numa rotunda</div>
+              <div class="odd-event-context">Fenómeno raríssimo nunca antes avistado na Estrada Nacional 125</div>
+            </div>
+            <button type="button" class="odd-button" onclick="placeOdd('Pisca na Rotunda', '4850.00')">4.850,00</button>
+          </div>
+
+          <div class="odd-row">
+            <div class="odd-info">
+              <div class="odd-event-name">Comboio da CP não ser suprimido numa sexta-feira com chuva</div>
+              <div class="odd-event-context">Milagre absoluto certificado pela comissão de utentes</div>
+            </div>
+            <button type="button" class="odd-button" onclick="placeOdd('Comboio a Horas', '9999.00')">9.999,00</button>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Secção Central: Raspadinha do Tuga + Banners Clickbait -->
+    <div class="middle-section">
+
+      <!-- Raspadinha Digital Interativa -->
+      <section class="scratch-card-box">
+        <div class="scratch-header">
+          <span class="scratch-title">RASPADINHA DO TUGA &bull; MOD. 1</span>
+          <span class="scratch-price">CUSTO: 1€ NO IRS</span>
+        </div>
+
+        <div class="scratch-grid">
+          <div class="scratch-cell" id="scratch-1" onclick="scratchBox(1)">
+            <span>CLIQUE PARA</span>
+            <span>RASPAR</span>
+          </div>
+          <div class="scratch-cell" id="scratch-2" onclick="scratchBox(2)">
+            <span>CLIQUE PARA</span>
+            <span>RASPAR</span>
+          </div>
+          <div class="scratch-cell" id="scratch-3" onclick="scratchBox(3)">
+            <span>CLIQUE PARA</span>
+            <span>RASPAR</span>
+          </div>
+        </div>
+
+        <div class="scratch-status-text" id="scratch-status">
+          Raspe os 3 campos acima com a moeda virtual para ver se ganha o prémio do Estado!
+        </div>
+      </section>
+
+      <!-- Banners de Clickbait Clássicos da Internet Pirata Portuguesa -->
+      <section class="clickbait-box">
+        <div class="clickbait-item" onclick="triggerClickbait('frangos')">
+          <span class="clickbait-badge">MÉTODO DE BRAGA</span>
+          <div class="clickbait-headline">Dono de churrasqueira faturou 50 frangos por baixo da mesa e comprou um Mercedes aos 23 anos!</div>
+        </div>
+
+        <div class="clickbait-item" onclick="triggerClickbait('emel')">
+          <span class="clickbait-badge">URGENTE EMEL</span>
+          <div class="clickbait-headline">Fiscal multou carro por 2 minutos de atraso enquanto o condutor comprava pão. Veja as imagens!</div>
+        </div>
+
+        <div class="clickbait-item" onclick="triggerClickbait('download')">
+          <span class="clickbait-badge">DOWNLOAD</span>
+          <div class="clickbait-headline">DESCARREGAR: FUTEBOL_PIRATA_HD_v2.exe (24 KB) &bull; Sem vírus garantido pelo sobrinho!</div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Rodapé com Botão de Regresso -->
+    <footer class="footer-bar">
+      <button type="button" class="btn-exit-pirate" id="btn-exit-pirate" onclick="closeAndReturn()">
+        FECHAR ESTE SITE PIRATA E VOLTAR AO BALCÃO DO GOVERNO &raquo;
+      </button>
+      <div class="disclaimer-text">
+        Aviso Legal: 99% dos contribuintes perdem a cabeça neste balcão. Joga com moderação, mas paga a luz e a água a tempo. Patrocinado pela Santa Casa do Desenrascanço Nacional.
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    // Motor de Som Táteis com Web Audio API
+    let audioCtx = null;
+    function getAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+
+    function playRefereeWhistle() {
+      try {
+        const ctx = getAudio();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(2200, now);
+        osc.frequency.linearRampToValueAtTime(2800, now + 0.15);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      } catch (e) {}
+    }
+
+    function playCasinoWin() {
+      try {
+        const ctx = getAudio();
+        const now = ctx.currentTime;
+        [587.33, 739.99, 880, 1174.66].forEach((f, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(f, now + idx * 0.07);
+          gain.gain.setValueAtTime(0.14, now + idx * 0.07);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.25);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.07);
+          osc.stop(now + idx * 0.07 + 0.3);
+        });
+      } catch (e) {}
+    }
+
+    function playBuzzerLoss() {
+      try {
+        const ctx = getAudio();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(120, now);
+        osc.frequency.linearRampToValueAtTime(70, now + 0.3);
+        gain.gain.setValueAtTime(0.22, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      } catch (e) {}
+    }
+
+    // Ação ao Clicar no Leitor Pirata
+    function handlePlayerClick(e) {
+      playRefereeWhistle();
+      alert('Transmissão Pirata Bloqueada!\nPara continuar a assistir à Assembleia da República em Full HD sem paragens, aposte pelo menos 5€ no Betanol!');
+    }
+
+    function fakeXClick() {
+      playRefereeWhistle();
+      alert('Tentou fechar o anúncio?\nParabéns! Abriu mais 2 patrocínios ocultos da Santa Casa da Burocracia.');
+    }
+
+    function switchServer(num) {
+      playRefereeWhistle();
+      alert(`A ligar ao Servidor ${num} via satélite pirata...\nO sinal foi temporariamente confiscado pela Autoridade Tributária.`);
+    }
+
+    function placeOdd(title, val) {
+      playCasinoWin();
+      alert(`Aposta de 10€ registada no mercado:\n"${title}" (Odd: ${val})\n\nO montante foi cativado preventivamente pelo Ministério das Finanças!`);
+    }
+
+    // Raspadinha do Tuga
+    const scratchOutcomes = [
+      { text: "Conta da EDP", val: "-145€" },
+      { text: "IUC do Clio", val: "-78€" },
+      { text: "Bica e Torrada", val: "-2.40€" }
+    ];
+    let scratchedCount = 0;
+
+    function scratchBox(num) {
+      const el = document.getElementById(`scratch-${num}`);
+      if (!el || el.classList.contains('scratched')) return;
+
+      playRefereeWhistle();
+      el.classList.add('scratched');
+      const item = scratchOutcomes[num - 1] || { text: "Multa da EMEL", val: "-30€" };
+      el.innerHTML = `<span>${item.text}</span><strong style="color:#ef4444">${item.val}</strong>`;
+      scratchedCount++;
+
+      const status = document.getElementById('scratch-status');
+      if (scratchedCount === 3) {
+        playBuzzerLoss();
+        status.innerHTML = '<strong style="color:#ef4444">PERDEU TUDO!</strong> O saldo da sua raspadinha foi absorvido para tapar o buraco das portagens da ex-SCUT.';
+      } else {
+        status.textContent = `Raspou ${scratchedCount} de 3 campos. Continue a raspar para ver se evita a auditoria fiscal!`;
+      }
+    }
+
+    function triggerClickbait(type) {
+      playRefereeWhistle();
+      if (type === 'download') {
+        alert('Download Intercetado!\nO ficheiro FUTEBOL_PIRATA_HD_v2.exe continha apenas um requerimento de penhora do Fisco em PDF.');
+      } else if (type === 'emel') {
+        alert('EMEL Informa:\nO parquímetro expirou enquanto lia esta notícia. Coima de 30€ emitida para o seu NIF.');
+      } else {
+        alert('Método de Braga:\nA receita do frango de churrasco foi confidenciada pelo conselho de ministros para pagar a dívida soberana.');
+      }
+    }
+
+    function triggerBetanoAction(title) {
+      playRefereeWhistle();
+      alert(`Secção "${title}":\nOs fundos estão cativados para a próxima comissão parlamentar.`);
+    }
+
+    function closeAndReturn() {
+      window.close();
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 250);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal do Cidadão | Balcão Oficial de Reclamações da República Portuguesa</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Faixa Oficial com as Cores de Portugal -->
+  <div class="national-band">
+    <div class="band-green"></div>
+    <div class="band-red"></div>
+  </div>
+
+  <!-- Cabeçalho Oficial do Governo -->
+  <header class="gov-header">
+    <div class="gov-header-inner">
+      <!-- Linha 1: Marca Institucional e Estado de Sessão -->
+      <div class="gov-header-top">
+        <div class="gov-brand">
+          <div class="gov-crest">
+            <!-- Emblema da Esfera Armilar e Escudo Oficial em SVG -->
+            <svg viewBox="0 0 32 32" fill="none" class="crest-svg" aria-hidden="true">
+              <circle cx="16" cy="16" r="14" stroke="#d97706" stroke-width="2.5"/>
+              <path d="M16 4v24M4 16h24" stroke="#d97706" stroke-width="1.5"/>
+              <rect x="11" y="10" width="10" height="12" fill="#b91c1c" stroke="#0f172a" stroke-width="1.5" rx="1"/>
+              <circle cx="16" cy="16" r="3" fill="#ffffff"/>
+            </svg>
+          </div>
+          <div class="gov-titles">
+            <span class="gov-republic">REPÚBLICA PORTUGUESA</span>
+            <span class="gov-ministry">Ministério da Burocracia, Transição Lenta e Taxas Adicionais</span>
+          </div>
+        </div>
+
+        <!-- Estado do Balcão e Relógio de Tolerância de Ponto -->
+        <div class="gov-meta">
+          <div class="gov-badge-box">
+            <span class="pulse-indicator"></span>
+            <span class="badge-txt">SISTEMA: <strong>TOLERÂNCIA DE PONTO</strong></span>
+          </div>
+          <div class="gov-session-timer">
+            <span>Sessão:</span>
+            <span id="session-clock" class="mono-timer">03:45</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linha 2: Fases do Procedimento (Abas Centradas, Perfeitas e Sem Quebra) -->
+      <div class="gov-header-nav-wrap">
+        <nav class="gov-stepper" aria-label="Abas e Fases do Procedimento">
+          <div class="gov-step active" id="step-node-1" role="button" tabindex="0" title="Aba 1: NIF e Acesso" data-tab-step="1">
+            <span class="step-num">1</span>
+            <span class="step-txt">NIF e Acesso</span>
+          </div>
+          <div class="step-sep" aria-hidden="true">&rsaquo;</div>
+          <div class="gov-step" id="step-node-2" role="button" tabindex="0" title="Aba 2: Chave e Teclas" data-tab-step="2">
+            <span class="step-num">2</span>
+            <span class="step-txt">Chave e Teclas</span>
+          </div>
+          <div class="step-sep" aria-hidden="true">&rsaquo;</div>
+          <div class="gov-step" id="step-node-3" role="button" tabindex="0" title="Aba 3: Requerimento" data-tab-step="3">
+            <span class="step-num">3</span>
+            <span class="step-txt">Requerimento</span>
+          </div>
+          <div class="step-sep" aria-hidden="true">&rsaquo;</div>
+          <div class="gov-step" id="step-node-4" role="button" tabindex="0" title="Aba 4: Homologação" data-tab-step="4">
+            <span class="step-num">4</span>
+            <span class="step-txt">Homologação</span>
+          </div>
+          <div class="step-sep" aria-hidden="true">&rsaquo;</div>
+          <div class="gov-step" id="step-node-5" role="button" tabindex="0" title="Aba 5: Certidão Final" data-tab-step="5">
+            <span class="step-num">5</span>
+            <span class="step-txt">Certidão Final</span>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner Normativo Bem-Humorado -->
+  <div class="gov-banner-bar">
+    <div class="gov-banner-inner">
+      <span class="decree-tag">DESPACHO Nº 2026/04:</span>
+      <span id="banner-notice-text">Informa-se os contribuintes de que a equipa de atendimento está em formação para aprender a dizer "não" com mais simpatia.</span>
+    </div>
+  </div>
+
+  <!-- Content Wrapper Central -->
+  <main class="gov-viewport">
+
+    <!-- ============================================== -->
+    <!-- ETAPA 1: AUTENTICAÇÃO POR NIF E CHAVE GOV.PT   -->
+    <!-- ============================================== -->
+    <section id="gov-pane-1" class="gov-pane active">
+      <div class="gov-card">
+
+        <div class="card-official-header">
+          <div class="stamp-seal">BALCÃO ÚNICO DIGITAL &bull; FORMULÁRIO MOD. 22-A</div>
+          <h1 class="card-heading">Identifique-se Antes de se Queixar do Estado</h1>
+          <p class="card-subheading">
+            Antes de apresentar qualquer queixa contra os serviços públicos, o Fisco precisa de verificar se não tem nenhuma portagem ou fatura de água em atraso.
+          </p>
+        </div>
+
+        <form id="form-gov-login" novalidate onsubmit="return false;">
+
+          <!-- Campo NIF com Validação Crítica e Cómica -->
+          <div class="gov-field-row">
+            <label for="field-nif" class="gov-label">
+              Número de Identificação Fiscal (NIF) do Contribuinte:
+              <span class="req-star">*</span>
+            </label>
+            <div class="gov-input-wrap">
+              <input 
+                type="text" 
+                id="field-nif" 
+                class="gov-input mono-font" 
+                placeholder="239841029"
+                maxlength="9"
+                autocomplete="off"
+                spellcheck="false"
+              >
+            </div>
+            <div class="gov-help" id="nif-help-text">
+              Deve conter 9 algarismos válidos (começados por 1, 2 ou 5). Se colar o número com Ctrl+V, o sistema chama a Autoridade Tributária!
+            </div>
+          </div>
+
+          <!-- Palavra-passe da Chave Móvel Digital -->
+          <div class="gov-field-row">
+            <div class="label-split-row">
+              <label for="field-pass" class="gov-label">
+                Código de Acesso da Chave Móvel Digital:
+                <span class="req-star">*</span>
+              </label>
+              <button type="button" class="gov-link" id="btn-forgot-password">
+                Esqueceu-se da palavra-passe? Agende para 2028
+              </button>
+            </div>
+            <div class="gov-input-wrap gov-split-action">
+              <input 
+                type="password" 
+                id="field-pass" 
+                class="gov-input" 
+                placeholder="Introduza pelo menos 8 carateres certificados..."
+                autocomplete="current-password"
+              >
+              <!-- Botão [Espreitar Chave] que ativa um popup chato de IVA -->
+              <button type="button" class="btn-gov-subtle" id="btn-tax-eye-trap" title="Ver a palavra-passe em texto limpo">
+                [Espreitar Chave]
+              </button>
+            </div>
+            <div class="gov-help" id="pass-help-text">
+              Exige no mínimo 8 carateres, uma maiúscula e um número. Não vale a data da tomada de posse do Governo.
+            </div>
+          </div>
+
+          <!-- Declarações Oficiais de Submissão Fiscal -->
+          <div class="gov-decree-box">
+            <div class="decree-title">DECLARAÇÕES SOLENES DO CIDADÃO RECLAMANTE:</div>
+
+            <label class="gov-checkbox-row">
+              <input type="checkbox" id="check-gov-1">
+              <span class="gov-box-check"></span>
+              <span class="gov-check-label">
+                Comprometo-me a não bufar caso o meu processo fique retido para parecer consultivo do Conselho de Ministros.
+              </span>
+            </label>
+
+            <label class="gov-checkbox-row">
+              <input type="checkbox" id="check-gov-2">
+              <span class="gov-box-check"></span>
+              <span class="gov-check-label">
+                <strong>Obrigatório pelo Código Tributário:</strong> Autorizo o Estado a abater qualquer excesso de indignação diretamente no reembolso do meu próximo IRS.
+              </span>
+            </label>
+          </div>
+
+          <!-- ============================================== -->
+          <!-- CÂMARA DO SELO NOTARIAL (BOTÃO ESCONDIDO)       -->
+          <!-- ============================================== -->
+          <div class="gov-seal-chamber" id="seal-chamber">
+            <div class="seal-prompt-text">
+              <strong>Formalidade Notarial Obrigatória:</strong> Antes de conseguir entrar no balcão, o cidadão deve localizar e aplicar o <strong>Selo Branco da República</strong> para autenticar as credenciais:
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <button type="button" class="btn-stamp-interactive" id="btn-stamp-credentials">
+                CARIMBAR COM O SELO DA REPÚBLICA
+              </button>
+              <span class="seal-stamped-badge" id="seal-stamped-badge" style="display: none;">
+                AUTENTICADO COM SUCESSO &bull; PORTARIA 2026
+              </span>
+            </div>
+          </div>
+
+          <!-- Botões com Inversão Tática de Governo & Decoy Pirata -->
+          <div class="gov-footer-actions">
+            <div class="gov-footer-legal">
+              Procedimento sujeito ao Código de Procedimento Administrativo e aos patrocínios autorizados pelo Governo.
+            </div>
+
+            <!-- Botão Isca Estilo Site Pirata (Abre o Betanol 365) -->
+            <button type="button" class="btn btn-betanol-flashy btn-block" id="btn-trap-fast-track" style="margin-bottom: 10px;">
+              ENTRAR DE IMEDIATO NO BALCÃO (VIA VERDE GOV &bull; SEM ESPERAS)
+            </button>
+
+            <div class="gov-button-row" id="row-login-actions">
+              <!-- Botão 1: Vermelho/Chamativo que CANCELA com burocracia -->
+              <button type="button" class="btn btn-gov-trap" id="btn-trap-cancel-login">
+                RECORRER AO TRIBUNAL CONSTITUCIONAL E DESISTIR
+              </button>
+
+              <!-- Botão 2: Verde Oficial que exige o selo prévio e tem texto camaleão! -->
+              <button type="button" class="btn btn-gov-primary" id="btn-real-login-submit">
+                Entrar no Balcão Único do Cidadão &raquo;
+              </button>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- ETAPA 2: A ZONA DE TECLAS INVERTIDAS & 2FA     -->
+    <!-- ============================================== -->
+    <section id="gov-pane-2" class="gov-pane">
+      <div class="gov-card">
+
+        <div class="card-official-header">
+          <div class="stamp-seal">ZONA DE TRANSCRIÇÃO &bull; PORTARIA DE ATALHOS INVERTIDOS</div>
+          <h1 class="card-heading">Validação de Segurança com Teclas Trocadas</h1>
+          <p class="card-subheading">
+            O Estado tentou enviar um SMS para o seu telemóvel, mas a operadora cortou o serviço por falta de pagamento. Transcreva o código publicado e confirme a referência de protocolo.
+          </p>
+        </div>
+
+        <!-- Painel do Diário da República Eletrónico -->
+        <div class="dr-terminal">
+          <div class="dr-terminal-header">
+            <span>DIÁRIO DA REPÚBLICA ELETRÓNICO &bull; 2ª SÉRIE</span>
+            <span class="dr-stamp">CÓDIGO HOMOLOGADO</span>
+          </div>
+          <div class="dr-terminal-body">
+            <div class="dr-notice-title">CÓDIGO DE AUTORIZAÇÃO TEMPORÁRIO PARA RECLAMAÇÃO:</div>
+            <div class="dr-code-display" id="dr-token-display">582 914</div>
+            <div class="dr-notice-sub">Transcreva os 6 números por ordem estrita antes que o Governo caia ou haja uma remodelação ministerial.</div>
+          </div>
+        </div>
+
+        <!-- 6 Caixas para os Números do Código -->
+        <div class="gov-otp-section">
+          <label class="gov-label center-align">
+            Introduza os 6 Números Publicados no Visor Acima:
+          </label>
+          <div class="gov-otp-grid" id="gov-otp-row">
+            <input type="text" maxlength="1" class="otp-cell" data-idx="0" inputmode="numeric">
+            <input type="text" maxlength="1" class="otp-cell" data-idx="1" inputmode="numeric">
+            <input type="text" maxlength="1" class="otp-cell" data-idx="2" inputmode="numeric">
+            <span class="otp-separator">&bull;</span>
+            <input type="text" maxlength="1" class="otp-cell" data-idx="3" inputmode="numeric">
+            <input type="text" maxlength="1" class="otp-cell" data-idx="4" inputmode="numeric">
+            <input type="text" maxlength="1" class="otp-cell" data-idx="5" inputmode="numeric">
+          </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- A FAMOSA ZONA DE TECLAS INVERTIDAS E CTRL+C/V  -->
+        <!-- ============================================== -->
+        <div class="inverted-keys-zone">
+          <div class="zone-badge">PROVA DE AGILIDADE DIGITAL &bull; NORMA PORTUGUESA NP-404</div>
+          <h3 class="zone-title">Transcrição Obrigatória da Referência de Protocolo</h3>
+          <p class="zone-desc">
+            Para validar este passo, confirme a referência oficial abaixo no campo de validação. 
+            <strong>Dica de conveniência:</strong> Se não quiser escrever à mão, selecione o texto, faça <code>Ctrl+C</code> e cole com <code>Ctrl+V</code>... se tiver coragem!
+          </p>
+
+          <!-- Referência Oficial Gerada para Cópia -->
+          <div class="target-reference-box">
+            <span class="ref-tag">REFERÊNCIA OFICIAL A TRANSCREVER:</span>
+            <div class="ref-display-text" id="target-ref-sample">PT-8492-9104-X</div>
+            <button type="button" class="btn-copy-ref" id="btn-copy-target-ref">
+              Copiar com 1 Clique (ou use Ctrl+C)
+            </button>
+          </div>
+
+          <!-- Campo Onde as Teclas Estão Invertidas! -->
+          <div class="gov-field-row" style="margin-top: 14px; margin-bottom: 6px;">
+            <label for="field-inverted-ref" class="gov-label">
+              Cole ou Digite a Referência Aqui:
+              <span class="req-star">*</span>
+            </label>
+            <div class="gov-input-wrap">
+              <input 
+                type="text" 
+                id="field-inverted-ref" 
+                class="gov-input mono-font text-inverted-behavior" 
+                placeholder="Clique aqui e tente colar com Ctrl+V ou digitar..."
+                autocomplete="off"
+                spellcheck="false"
+              >
+            </div>
+            <div class="gov-help" id="inverted-field-help">
+              Aviso Governamental: Neste campo, os atalhos de teclado foram invertidos pela Secretaria-Geral. A digitação funciona de trás para a frente (marcha-atrás)!
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ============================================== -->
+        <!-- O BOTÃO TROLL ENCOLHEDOR: ATALHO VIP DE AUSTERIDADE -->
+        <!-- ============================================== -->
+        <div class="troll-shortcut-zone">
+          <div class="troll-zone-header">CANAL PRIVILEGIADO &bull; PROTOCOLO DE EXCEÇÃO VIP</div>
+          <button type="button" class="btn btn-troll-shrink" id="btn-troll-fast-pass">
+            ATALHO VIP: Aceder sem Carimbos nem Teclas Invertidas (Via Rápida)
+          </button>
+          <div class="troll-shrink-notice" id="troll-shrink-notice"></div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- O ARMÁRIO DE ARQUIVO: PROCURE O CARIMBO NAS GAVETAS -->
+        <!-- ============================================== -->
+        <div class="gov-filing-cabinet" id="gov-filing-cabinet">
+          <div class="cabinet-header">
+            <span class="cabinet-badge">ARQUIVO MORTO DA SECRETARIA-GERAL</span>
+            <span class="cabinet-title">Procure o Carimbo de Homologação nas Gavetas do Ministério</span>
+          </div>
+          <p class="cabinet-desc">
+            O funcionário do balcão ausentou-se para tomar café e deixou o <strong>Carimbo Oficial da 2ª Série</strong> escondido numa das gavetas do arquivo. 
+            Abra as gavetas para procurar o carimbo... mas cuidado com as pastas de patrocínios e teias de aranha!
+          </p>
+
+          <div class="drawers-grid">
+            <button type="button" class="cabinet-drawer" id="drawer-btn-1" data-drawer-type="dust">
+              <div class="drawer-handle-bar"></div>
+              <span class="drawer-tag">GAVETA A</span>
+              <span class="drawer-sub">Processos de 1994 (Arquivo Morto)</span>
+            </button>
+
+            <button type="button" class="cabinet-drawer" id="drawer-btn-2" data-drawer-type="betanol">
+              <div class="drawer-handle-bar"></div>
+              <span class="drawer-tag">GAVETA B</span>
+              <span class="drawer-sub">Patrocínios e Jogos da Santa Casa</span>
+            </button>
+
+            <button type="button" class="cabinet-drawer" id="drawer-btn-3" data-drawer-type="stamp">
+              <div class="drawer-handle-bar"></div>
+              <span class="drawer-tag">GAVETA C</span>
+              <span class="drawer-sub">Despachos Pendentes do Ministro</span>
+            </button>
+          </div>
+
+          <div class="cabinet-status-card" id="cabinet-status-card">
+            <span class="status-kicker">Estado das Buscas:</span>
+            <span class="status-text" id="cabinet-status-text">Nenhuma gaveta aberta. O botão de homologação permanece trancado sem carimbo oficial.</span>
+          </div>
+        </div>
+
+        <div class="gov-footer-actions">
+          <button type="button" class="btn btn-gov-secondary" id="btn-otp-renew">
+            Pedir Parecer Jurídico para Novo Código (Custo: 450.000€ ao Estado)
+          </button>
+          <button type="button" class="btn btn-gov-primary" id="btn-otp-validate">
+            Homologar Código e Avançar para a Queixa &raquo;
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- ETAPA 3: REQUERIMENTO OFICIAL MOD. 22-B        -->
+    <!-- ============================================== -->
+    <section id="gov-pane-3" class="gov-pane">
+      <div class="gov-card">
+
+        <div class="card-official-header">
+          <div class="stamp-seal">LIVRO DE RECLAMAÇÕES OFICIAL &bull; REQUERIMENTO MOD. 22-B</div>
+          <h1 class="card-heading">Apresentar Reclamação ao Governo da República</h1>
+          <p class="card-subheading">
+            Descreva a falha dos serviços com respeito e compostura. Reclamações que usem a palavra "vergonha" ou "crise" serão rejeitadas liminarmente.
+          </p>
+        </div>
+
+        <!-- Isca de Site Pirata: Banner Chamativo do Betanol -->
+        <div class="pirate-bait-banner" id="pirate-bait-step3" title="Clique para transmissão ao vivo">
+          <span class="bait-badge">EM DIRETO</span>
+          <span>ASSISTA AO MINISTRO AO VIVO EM HD (SEM CORTES) &bull; Acompanhe a sessão plenária sem atrasos!</span>
+        </div>
+
+        <form id="form-gov-complaint" novalidate onsubmit="return false;">
+
+          <!-- Ministério de Destino Burocrático -->
+          <div class="gov-field-row">
+            <label for="select-ministry" class="gov-label">
+              Ministério ou Secretaria de Estado Competente:
+              <span class="req-star">*</span>
+            </label>
+            <div class="gov-input-wrap">
+              <select id="select-ministry" class="gov-input gov-select">
+                <option value="">-- Selecione o Ministério para onde quer mandar a queixa --</option>
+                <option value="financas">Ministério das Finanças (Prazo de resposta: Imediato para cobrar, 4 anos para devolver)</option>
+                <option value="saude">Serviço Nacional de Saúde - SNS (A sua consulta foi agendada para Novembro de 2031)</option>
+                <option value="infraestruturas">Ministério das Infraestruturas (A resposta está retida no concurso público do novo aeroporto)</option>
+                <option value="primeiro_ministro">Gabinete do Primeiro-Ministro (Aviso: O Ministro da pasta demitiu-se ontem)</option>
+                <option value="cpi">Comissão Parlamentar de Inquérito (As conclusões serão apuradas na próxima legislatura)</option>
+              </select>
+            </div>
+            <div class="gov-help" id="ministry-help-text">
+              A escolha de ministérios em crise política pode atrasar o processo em 12 a 24 meses úteis.
+            </div>
+          </div>
+
+          <!-- Grau de Cunha / Urgência à Portuguesa -->
+          <div class="gov-field-row">
+            <label class="gov-label">Grau de Influência Política / Urgência do Pedido:</label>
+            <div class="gov-radio-deck">
+              
+              <label class="gov-radio-tile selected" id="tile-cunha-sem">
+                <input type="radio" name="gov-influence" value="sem_cunha" checked>
+                <div class="tile-body">
+                  <span class="tile-headline">Cidadão Comum (Sem Cunha)</span>
+                  <span class="tile-caption">Fila geral de espera. Provavelmente lido em 2030.</span>
+                </div>
+              </label>
+
+              <label class="gov-radio-tile" id="tile-cunha-junta">
+                <input type="radio" name="gov-influence" value="cunha_junta">
+                <div class="tile-body">
+                  <span class="tile-headline">Conheço o Presidente da Junta</span>
+                  <span class="tile-caption">O processo passa para a gaveta de cima do balcão.</span>
+                </div>
+              </label>
+
+              <label class="gov-radio-tile" id="tile-cunha-tv">
+                <input type="radio" name="gov-influence" value="canal_noticias">
+                <div class="tile-body">
+                  <span class="tile-headline">Chamei a CMTV e a Televisão</span>
+                  <span class="tile-caption">Resolução de emergência para não perder votos nas sondagens.</span>
+                </div>
+              </label>
+
+            </div>
+          </div>
+
+          <!-- Assunto com Censura de Palavras de Crise -->
+          <div class="gov-field-row">
+            <label for="field-gov-subject" class="gov-label">
+              Assunto Sintético da Reclamação:
+              <span class="req-star">*</span>
+            </label>
+            <div class="gov-input-wrap">
+              <input 
+                type="text" 
+                id="field-gov-subject" 
+                class="gov-input" 
+                placeholder="ex: Inoperância crónica dos serviços e pedido formal de explicações"
+                autocomplete="off"
+              >
+            </div>
+            <div class="gov-help" id="subject-help-text">
+              Entre 15 e 60 carateres. É proibido usar as palavras "crise", "greve", "vergonha", "urgente" ou "imposto".
+            </div>
+          </div>
+
+          <!-- ============================================== -->
+          <!-- ZONA 2 DE TECLAS & ATALHOS INVERTIDOS: MINUTA  -->
+          <!-- ============================================== -->
+          <div class="inverted-keys-zone" style="margin-top: 10px; margin-bottom: 18px;">
+            <div class="zone-badge">ZONA DE ATALHO REGULAMENTAR &bull; PORTARIA N.º 42-A</div>
+            <h3 class="zone-title">Minuta Protocolar Pré-Aprovada pelo Conselho de Ministros</h3>
+            <p class="zone-desc">
+              Para poupar esforço e não estar a redigir os 80 carateres regulamentares à mão, o Estado disponibiliza uma minuta oficial. Pode copiar o texto com <code>Ctrl+C</code> (ou pelo botão) e colar com <code>Ctrl+V</code> no requerimento abaixo... mas atenção aos atalhos fiscalizados pela Inspeção-Geral!
+            </p>
+            <div class="target-reference-box">
+              <span class="ref-tag">MINUTA RECOMENDADA:</span>
+              <div class="ref-display-text" id="target-minuta-sample" style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.2px; line-height: 1.45; max-width: 65%;">
+                Exmo. Senhor Ministro, venho por este meio expor com a devida vénia republicana que este balcão necessita de resolução célere e urgente.
+              </div>
+              <button type="button" class="btn-copy-ref" id="btn-copy-target-minuta">
+                Copiar Minuta Oficial (Ctrl+C)
+              </button>
+            </div>
+          </div>
+
+          <!-- Texto do Requerimento com Exigência de Cortesia Constitucional -->
+          <div class="gov-field-row">
+            <div class="label-split-row">
+              <label for="field-gov-text" class="gov-label">
+                Texto Integral do Requerimento:
+                <span class="req-star">*</span>
+              </label>
+              <span class="gov-counter" id="gov-char-counter">0 / 80 carateres obrigatórios</span>
+            </div>
+            <textarea 
+              id="field-gov-text" 
+              class="gov-input gov-textarea" 
+              rows="5"
+              placeholder="Exmo. Senhor Ministro, venho por este meio expor com a devida vénia republicana que..."
+            ></textarea>
+            <div class="gov-help" id="text-help-text">
+              Deve conter entre 80 e 350 carateres. O requerimento DEVE começar obrigatoriamente com "Exmo. Senhor Ministro" ou "Ao Governo da República".
+            </div>
+          </div>
+
+          <!-- Anexo com Certidão em Triplicado -->
+          <div class="gov-field-row">
+            <label class="gov-label">
+              Certidão de Paciência Passada pela Junta de Freguesia (.txt):
+              <span class="req-star">*</span>
+            </label>
+            <div class="gov-cert-box">
+              <div class="cert-details">
+                <div class="cert-stamp-badge">MOD. 3</div>
+                <div class="cert-text-lines">
+                  <span class="cert-name" id="cert-filename-label">Nenhuma certidão anexada</span>
+                  <span class="cert-sub">Documento legal obrigatório em formato .txt com menos de 3 meses</span>
+                </div>
+              </div>
+              <div class="cert-action-btns">
+                <input type="file" id="gov-file-native" accept=".txt" style="display: none;">
+                <button type="button" class="btn btn-gov-secondary btn-sm" id="btn-browse-cert">
+                  Procurar Certidão no PC (.txt)
+                </button>
+                <button type="button" class="btn btn-gov-accent btn-sm" id="btn-auto-stamp-cert">
+                  Carimbar e Emitir Certidão Oficial
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================== -->
+          <!-- DOSSIÊ DE DESPACHO E ASSINATURA (BOTÃO ESCONDIDO POR ABAS) -->
+          <!-- ============================================== -->
+          <div class="gov-dossier-tabs" id="gov-dossier-tabs">
+            <div class="dossier-tab-nav">
+              <button type="button" class="dossier-tab-btn active" id="tab-btn-rules" data-tab="rules">
+                1. Instruções Regimentais
+              </button>
+              <button type="button" class="dossier-tab-btn" id="tab-btn-dispatch" data-tab="dispatch">
+                2. Pasta de Despacho & Assinatura &raquo;
+              </button>
+            </div>
+
+            <div class="dossier-tab-panel" id="tab-panel-rules">
+              <p style="font-size: 12px; color: #475569; margin: 0 0 10px; line-height: 1.45;">
+                O regulamento do Diário da República exige a conferência formal antes do envio. Para localizar e assinar o botão de despacho oficial, <strong>mude para a aba "2. Pasta de Despacho & Assinatura"</strong> acima.
+              </p>
+              <button type="button" class="btn btn-gov-secondary btn-sm" id="btn-switch-to-dispatch">
+                Procurar e Abrir Pasta de Despacho &raquo;
+              </button>
+            </div>
+
+            <div class="dossier-tab-panel" id="tab-panel-dispatch" style="display: none;">
+              <p style="font-size: 12px; color: var(--flag-green); font-weight: 700; margin: 0 0 12px;">
+                Pasta de Despacho localizada! O requerimento pode agora ser submetido à conferência ministerial:
+              </p>
+
+              <!-- Alerta Dinâmico do Botão que Foge do Rato -->
+              <div class="dodge-alert-box" id="dodge-alert-box" style="display: none;"></div>
+
+              <div class="gov-footer-actions" style="margin-top: 0; padding-top: 0; border-top: none;">
+                <button type="button" class="btn btn-gov-secondary" id="btn-back-to-step-2">
+                  &laquo; Voltar ao Balcão da Chave Móvel
+                </button>
+                <button type="button" class="btn btn-gov-primary btn-dodge" id="btn-submit-complaint-step">
+                  Conferir e Obter Parecer Ministerial &raquo;
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- ETAPA 4: REVISÃO, MODAL MINISTERIAL E ENVIO    -->
+    <!-- ============================================== -->
+    <section id="gov-pane-4" class="gov-pane">
+      <div class="gov-card">
+
+        <div class="card-official-header">
+          <div class="stamp-seal">SECRETARIA-GERAL &bull; DOSSIÊ DE AUDITORIA Nº <span id="rev-dossier-code">PT-8491</span></div>
+          <h1 class="card-heading">Conferência Final da Petição</h1>
+          <p class="card-subheading">
+            Reveja a queixa que vai dar entrada no Governo. Uma vez homologada, o seu processo será enviado para um grupo de trabalho com prazo de conclusão indefinido.
+          </p>
+        </div>
+
+        <!-- Barra Oficial de Tradução Estilo Google / Navegador -->
+        <div class="browser-translate-widget" id="browser-translate-widget">
+          <div class="translate-widget-left">
+            <div class="translate-g-logo" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6" />
+              </svg>
+            </div>
+            <div class="translate-widget-info">
+              <div class="translate-title">
+                <strong>Traduzir esta página?</strong> 
+                <span class="translate-lang-tag">Latim Burocrático &rarr; Português (PT)</span>
+              </div>
+              <div class="translate-sub" id="translate-status-text">
+                Norma UE 2026: O dossiê foi redigido em latim de Bruxelas. O botão de submissão só surge após traduzir a página.
+              </div>
+            </div>
+          </div>
+          <div class="translate-widget-actions">
+            <button type="button" class="btn-translate-action" id="btn-trigger-translation">
+              Traduzir Página
+            </button>
+            <button type="button" class="btn-translate-dismiss" id="btn-dismiss-translation">
+              Nunca Traduzir (Desistir)
+            </button>
+          </div>
+        </div>
+
+        <!-- Tabela do Dossiê do Contribuinte -->
+        <div class="gov-dossier-frame">
+          <table class="gov-table">
+            <tbody>
+              <tr>
+                <th scope="row">NIF do Reclamante:</th>
+                <td id="rev-nif" class="mono-font">239841029</td>
+              </tr>
+              <tr>
+                <th scope="row">Ministério Afeto:</th>
+                <td id="rev-ministry">Ministério das Finanças</td>
+              </tr>
+              <tr>
+                <th scope="row">Grau de Influência:</th>
+                <td id="rev-influence">CIDADÃO COMUM (SEM CUNHA)</td>
+              </tr>
+              <tr>
+                <th scope="row">Assunto Notificado:</th>
+                <td id="rev-subject">Inoperância crónica dos serviços públicos</td>
+              </tr>
+              <tr>
+                <th scope="row">Referência Validada:</th>
+                <td id="rev-validated-ref" class="mono-font">PT-8492-9104-X</td>
+              </tr>
+              <tr>
+                <th scope="row">Certidão Vinculada:</th>
+                <td id="rev-cert" class="mono-font">certidao_resiliencia_cidadao.txt</td>
+              </tr>
+              <tr>
+                <th scope="row">Carateres Contabilizados:</th>
+                <td id="rev-chars">138 carateres sob juramento</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="gov-quote-box">
+          <span class="quote-header">TEXTO OFICIAL DO REQUERIMENTO PARA O DIÁRIO DA REPÚBLICA:</span>
+          <p class="quote-text" id="rev-body-text">--</p>
+        </div>
+
+        <!-- Barra de Transmissão Ministerial Simulada -->
+        <div class="gov-progress-box" id="gov-transmission-box" style="display: none;">
+          <div class="progress-legend">
+            <span id="trans-state-text">A remeter petição para 4 secretarias de estado...</span>
+            <span id="trans-pct-text" class="mono-font">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="gov-progress-bar"></div>
+          </div>
+        </div>
+
+        <div class="gov-footer-actions">
+          <button type="button" class="btn btn-gov-secondary" id="btn-back-to-step-3">
+            &laquo; Retificar Declarações
+          </button>
+
+          <div class="untranslated-lock-msg" id="untranslated-lock-msg">
+            <span class="lock-bullet">&bull;</span>
+            <span>Botão de avanço bloqueado: Utilize o botão <strong>"Traduzir Página"</strong> acima para desbloquear a homologação.</span>
+          </div>
+
+          <button type="button" class="btn btn-gov-primary btn-advance-revealed" id="btn-open-ministerial-modal" style="display: none;">
+            Homologar e Submeter Requerimento ao Governo &raquo;
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- ETAPA 5: SUCESSO & DESPACHO MINISTERIAL        -->
+    <!-- ============================================== -->
+    <section id="gov-pane-5" class="gov-pane">
+      <div class="gov-card triumph-card">
+
+        <div class="gov-triumph-header">
+          <div class="official-stamp-red">DESPACHADO PELO GOVERNO DA REPÚBLICA</div>
+          <h1 class="triumph-title">O Seu Requerimento Deu Entrada no Estado!</h1>
+          <p class="triumph-desc">
+            Um feito histórico para a cidadania portuguesa. Conseguiu fintar a burocracia, os prazos de audiência prévia e a tolerância de ponto dos funcionários.
+          </p>
+        </div>
+
+        <!-- Ficha de Registo Oficial com Estatísticas -->
+        <div class="gov-receipt-frame">
+          <div class="receipt-headline">CERTIFICADO DE ENTRADA &bull; PROCESSO Nº <strong id="res-ticket-id" class="mono-font">#GOV-PT-928410</strong></div>
+          
+          <div class="receipt-data-grid">
+            
+            <div class="r-cell">
+              <span class="r-kicker">Data e Hora do Despacho:</span>
+              <span class="r-data" id="res-timestamp">13/10/2026 às 10:00</span>
+            </div>
+
+            <div class="r-cell">
+              <span class="r-kicker">Tempo de Luta com a Burocracia:</span>
+              <span class="r-data mono-font" id="res-duration">02m 44s</span>
+            </div>
+
+            <div class="r-cell">
+              <span class="r-kicker">Cliques com o Rato no Balcão:</span>
+              <span class="r-data mono-font" id="res-clicks">26 cliques</span>
+            </div>
+
+            <div class="r-cell">
+              <span class="r-kicker">Rasteiras e Popups Enfrentados:</span>
+              <span class="r-data" id="res-traps">4 pareceres rejeitados</span>
+            </div>
+
+            <div class="r-cell full-width">
+              <span class="r-kicker">Grau de Resiliência Cívica Atribuído:</span>
+              <strong class="r-data highlight-text" id="res-civic-rank">Doutorado em Filas das Finanças e Teclas Invertidas</strong>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- REGISTO OFICIAL DE INFRAÇÕES & CONTAGEM ERROS  -->
+        <!-- ============================================== -->
+        <div class="gov-error-audit-box">
+          <div class="error-audit-header">
+            <span class="audit-badge">AUDITORIA DISCIPLINAR DO CONTRIBUINTE</span>
+            <span class="audit-decree">Regulamento Geral de Infrações Burocráticas &bull; Artigo 88.º</span>
+          </div>
+
+          <div class="error-score-row">
+            <div class="error-score-card">
+              <span class="error-score-label">TOTAL DE ERROS COMETIDOS:</span>
+              <div class="error-score-number" id="res-total-errors">0</div>
+              <span class="error-score-sub" id="res-errors-verdict">Infrações registadas</span>
+            </div>
+            <div class="error-rating-card">
+              <span class="rating-label">CLASSIFICAÇÃO DO MINISTÉRIO:</span>
+              <div class="rating-value" id="res-error-rank">Cidadão Exemplar</div>
+              <p class="rating-desc" id="res-error-desc">Não cometeu qualquer infração processual no balcão.</p>
+            </div>
+          </div>
+
+          <!-- Tabela Discriminada de Faltas Cometidas -->
+          <div class="error-breakdown-wrapper">
+            <div class="breakdown-title">DISCRIMINAÇÃO DAS INFRAÇÕES DETETADAS NO BALCÃO:</div>
+            <div class="breakdown-grid">
+              <div class="breakdown-item">
+                <span class="b-label">Erros de Validação e Campos Vazios:</span>
+                <strong class="b-count mono-font" id="cnt-err-validation">0</strong>
+              </div>
+              <div class="breakdown-item">
+                <span class="b-label">Tentativas de Chico-Espertice com Copy/Paste:</span>
+                <strong class="b-count mono-font" id="cnt-err-paste">0</strong>
+              </div>
+              <div class="breakdown-item">
+                <span class="b-label">Falhas na Referência e Teclas Invertidas:</span>
+                <strong class="b-count mono-font" id="cnt-err-inverted">0</strong>
+              </div>
+              <div class="breakdown-item">
+                <span class="b-label">Tentativas Ilícitas de Fechar no [X]:</span>
+                <strong class="b-count mono-font" id="cnt-err-close-btn">0</strong>
+              </div>
+              <div class="breakdown-item">
+                <span class="b-label">Fugas ao Modal (Cliques Fora do Cartão):</span>
+                <strong class="b-count mono-font" id="cnt-err-escape">0</strong>
+              </div>
+              <div class="breakdown-item">
+                <span class="b-label">Palavras Censuradas Detetadas (crise/greve):</span>
+                <strong class="b-count mono-font" id="cnt-err-censored">0</strong>
+              </div>
+              <div class="breakdown-item">
+                <span class="b-label">Falta de Vénia Constitucional ("Exmo. Senhor Ministro"):</span>
+                <strong class="b-count mono-font" id="cnt-err-courtesy">0</strong>
+              </div>
+              <div class="breakdown-item">
+                <span class="b-label">Tentativas de Espreitar Palavra-Passe (Taxadas com IVA):</span>
+                <strong class="b-count mono-font" id="cnt-err-peek">0</strong>
+              </div>
+              <div class="breakdown-item">
+                <span class="b-label">Momentos de Sono na Fila Virtual (Inatividade 25s):</span>
+                <strong class="b-count mono-font" id="cnt-err-idle">0</strong>
+              </div>
+              <div class="breakdown-item">
+                <span class="b-label">Cliques em Anúncios Piratas do Betanol:</span>
+                <strong class="b-count mono-font" id="cnt-err-pirate">0</strong>
+              </div>
+              <div class="breakdown-item">
+                <span class="b-label">Gavetas do Arquivo Morto Falhadas:</span>
+                <strong class="b-count mono-font" id="cnt-err-drawers">0</strong>
+              </div>
+              <div class="breakdown-item">
+                <span class="b-label">Rasteiras de Botões Trolls e em Fuga:</span>
+                <strong class="b-count mono-font" id="cnt-err-troll">0</strong>
+              </div>
+              <div class="breakdown-item">
+                <span class="b-label">Paragens Cardíacas / Jump Scares de Abas:</span>
+                <strong class="b-count mono-font" id="cnt-err-jumpscares">0</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gov-footer-actions center-align">
+          <button type="button" class="btn btn-gov-accent" id="btn-download-official-proof">
+            Descarregar Certidão Oficial Homologada (.TXT)
+          </button>
+          <button type="button" class="btn btn-gov-secondary" id="btn-new-legislature">
+            Submeter Outro Requerimento (Na Próxima Legislatura)
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================== -->
+  <!-- SISTEMA DE POPUPS CHATOS E BUROCRÁTICOS       -->
+  <!-- ============================================== -->
+  <div class="annoying-popup-overlay" id="annoying-popup-overlay" style="display: none;">
+    <div class="annoying-popup-card" id="annoying-popup-card">
+      
+      <div class="annoying-popup-header">
+        <div class="popup-seal-wrap">
+          <span class="popup-seal-badge" id="popup-badge-text">AVISO DE INFRAÇÃO ADMINISTRATIVA</span>
+        </div>
+        <button type="button" class="popup-close-x" id="popup-close-btn" title="Fechar aviso (Só que não)">×</button>
+      </div>
+
+      <div class="annoying-popup-body">
+        <h3 class="popup-title" id="popup-title-text">Irregularidade Detetada no Processo</h3>
+        <p class="popup-message" id="popup-message-text">O cidadão violou os regulamentos da boa conduta administrativa.</p>
+        <div class="popup-fine-box">
+          <span class="fine-label">CONSEQUÊNCIA FISCAL ESTIMADA:</span>
+          <span class="fine-val" id="popup-fine-text">Aumento de 48 horas no tempo de espera do processo</span>
+        </div>
+      </div>
+
+      <div class="annoying-popup-footer">
+        <button type="button" class="btn btn-gov-trap" id="popup-btn-trap">
+          Interpor Recurso e Pagar Custas
+        </button>
+        <button type="button" class="btn btn-gov-primary" id="popup-btn-confirm">
+          Reconheço o Erro e Peço Desculpa ao Estado
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal Traiçoeiro de Envio Final -->
+  <div class="gov-modal-backdrop" id="modal-gov-trap" style="display: none;">
+    <div class="gov-modal-frame">
+      
+      <div class="modal-top-bar">
+        <span class="modal-seal-warning">AVISO MINISTERIAL &bull; CÓDIGO DE PROCESSO</span>
+        <h3 class="modal-title-text">Advertência de Consequências Fiscais</h3>
+      </div>
+
+      <div class="modal-copy">
+        <p>
+          Tem a certeza absoluta de que <strong>NÃO PRETENDE RETIRAR A QUEIXA</strong> contra o Governo da República?
+        </p>
+        <p class="modal-fine-text">
+          Avisamos que insistir com a reclamação poderá suscitar a abertura de uma inspeção tributária às suas faturas dos últimos 4 anos fiscais.
+        </p>
+      </div>
+
+      <div class="modal-button-stack">
+        <!-- Trap 1: Botão Grande que faz o cidadão desistir da queixa -->
+        <button type="button" class="btn btn-gov-trap btn-block" id="modal-btn-surrender">
+          RETIRAR A QUEIXA, PEDIR DESCULPA E ELOGIAR O GOVERNO
+        </button>
+
+        <!-- Trap 2: Botão Vermelho que arquiva por falta de quórum -->
+        <button type="button" class="btn btn-gov-danger btn-block" id="modal-btn-archive">
+          Arquivar Requerimento por Falta de Quórum
+        </button>
+
+        <!-- O verdadeiro botão é o link discreto no rodapé! -->
+        <div class="modal-link-wrap">
+          <button type="button" class="gov-stealth-link modal-stealth-jump" id="modal-btn-real-publish">
+            Prosseguir com a homologação oficial e publicação em Diário da República &raquo;
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- POPUP PIRATA DE APOSTAS & CASINO: BETANOL 365  -->
+  <!-- ============================================== -->
+  <div class="pirate-ad-overlay" id="pirate-ad-overlay" style="display: none;">
+    <div class="pirate-ad-card" id="pirate-ad-card">
+
+      <!-- Barra superior pirata com falso botão [X] -->
+      <div class="pirate-ad-topbar">
+        <div class="pirate-sponsor-tag">
+          <span class="pirate-live-dot"></span>
+          STREAMING PIRATA &bull; TRANSMISSÃO NÃO AUTORIZADA
+        </div>
+        <!-- Trap: Botão [X] falso que abre o betanol.html num novo separador! -->
+        <button type="button" class="pirate-fake-x" id="pirate-fake-x" title="Fechar anúncio">&times;</button>
+      </div>
+
+      <div class="pirate-ad-content">
+        <!-- Logótipo BETANOL -->
+        <div class="betanol-logo-wrap">
+          <div class="betanol-logo-badge">BETANOL <span class="betanol-gold">PRO</span></div>
+          <span class="betanol-slogan">Aposta já, reclama aos teus avós &bull; Casa de Apostas do Povo</span>
+        </div>
+
+        <div class="betanol-hero-banner">
+          <div class="hero-left">
+            <span class="bet-jackpot-kicker">SUPERODDS EXCLUSIVAS DE HOJE:</span>
+            <div class="bet-jackpot-val">SEGUNDA CIRCULAR PARADA: ODD 1.01</div>
+            <span class="bet-jackpot-sub">Aposta 10€ no trânsito parado e recebe 10,10€ garantidos!</span>
+          </div>
+          <div class="hero-right">
+            <div class="bonus-tag">BÓNUS TUGA</div>
+            <span class="bonus-sub">Mete o reembolso do IRS e ganha 3 raspadinhas virtuais!</span>
+          </div>
+        </div>
+
+        <!-- Mercados com Humor Genuinamente Português -->
+        <div class="betanol-markets-box">
+          <div class="markets-title">QUOTAS AO VIVO &bull; LIGA DO DESENRASCANÇO:</div>
+          <div class="market-row">
+            <span class="m-event">Atestar o carro em Espanha e trazer 2 presuntos ao fim de semana</span>
+            <span class="m-odd">1.02</span>
+          </div>
+          <div class="market-row">
+            <span class="m-event">Pagar a bica e o senhor do café dizer "não é preciso contribuinte chefe"</span>
+            <span class="m-odd">1.04</span>
+          </div>
+          <div class="market-row">
+            <span class="m-event">Condutor em Leiria fazer pisca para a esquerda antes de sair da rotunda</span>
+            <span class="m-odd">4.850,00</span>
+          </div>
+        </div>
+
+        <!-- Botão chamativo de aposta (armadilha) -->
+        <div class="betanol-cta-wrap">
+          <button type="button" class="btn-betanol-gamble" id="btn-betanol-gamble">
+            APOSTAR O REEMBOLSO DO IRS NO BETANOL (ABRIR CASINO) &raquo;
+          </button>
+        </div>
+
+        <div class="pirate-legal-disclaimer">
+          Aviso Legal: 99% dos contribuintes perdem a paciência neste balcão. Joga com moderação, mas paga a luz e a água a tempo. Patrocinado pela Santa Casa do Desenrascanço Nacional.
+        </div>
+      </div>
+
+      <!-- Rodapé com o botão verdadeiro de fechar que só ativa após contagem decrescente -->
+      <div class="pirate-ad-footer">
+        <button type="button" class="btn-pirate-real-close" id="btn-pirate-real-close" disabled>
+          Aguarde 3s para dispensar o patrocinador...
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="gov-footer">
+    <div class="footer-inner">
+      <span>Portal Oficial do Governo de Portugal &bull; Desenvolvido pelo Departamento Central de Fricção e Procedimentos Inconvenientes &bull; © 2026 República Portuguesa</span>
+    </div>
+  </footer>
+
+  <!-- ============================================== -->
+  <!-- SISTEMA DE JUMP SCARES BRUTAIS POR CADA ABA    -->
+  <!-- ============================================== -->
+  <div id="jumpscare-overlay" class="jumpscare-overlay" style="display: none;" aria-hidden="true" role="alert">
+    <div class="jumpscare-strobe-bg"></div>
+    <div class="jumpscare-static-noise"></div>
+    <div class="jumpscare-bloody-vignette"></div>
+    <div class="jumpscare-monster-stage" id="jumpscare-monster-stage">
+      <!-- SVG do Monstro Terrífico Injetado Dinamicamente -->
+    </div>
+    <div class="jumpscare-blood-text" id="jumpscare-blood-text">
+      O TEU NIF FOI CONDENADO À EXECUÇÃO FISCAL ETERNA!
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
